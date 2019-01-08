@@ -1,0 +1,2 @@
+optimal k for n = 6124450 is 10.0
+false positive rate (false postive/(false positive + true negative)) is 0.0010
