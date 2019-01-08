@@ -1,11 +1,9 @@
-
-# coding: utf-8
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import decomposition
 from sklearn import datasets
+
+
 #read dataset
 iris = datasets.load_iris()
 x = iris.data
@@ -22,10 +20,3 @@ for color, i, target_name in zip(colors, [0, 1, 2], target_names):
 plt.legend(loc='best', shadow=False, scatterpoints=1)
 plt.title('PCA of IRIS dataset')
 plt.show()
-
-
-
-
-
-
-
