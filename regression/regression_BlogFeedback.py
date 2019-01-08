@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[3]:
-
-
 from numpy import genfromtxt
 from sklearn.cross_validation import KFold
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
@@ -25,10 +19,6 @@ y_test=data_test[:,data_test.shape[1]-1]
 # In order to do multiple regression we need to add a column of 1s for x
 x_train = np.array([np.concatenate((v,[1])) for v in x_train])
 x_test= np.array([np.concatenate((v,[1])) for v in x_test])
-
-
-# In[43]:
-
 
 #fitting and cross validation
 n=10
@@ -64,10 +54,6 @@ for name,met in [
     print('RMSE of prediction: %.4f' %lsr_rmse)
     print('\n')
 
-
-# In[44]:
-
-
 #Lasso hyperparameter optimization using cross_val
 lasso=linear_model.Lasso()
 #no cross_val
@@ -76,10 +62,6 @@ yp_init=lasso.predict(x_test)
 error_init=abs(yp_init-y_test)
 rmse_init=np.sqrt(np.dot(error_init,error_init)/len(y_test))
 par_init=lasso.get_params()             #par_init['alpha']
-
-
-# In[45]:
-
 
 #cross_val
 kf = KFold(len(x_train), n_folds=10)
@@ -100,9 +82,6 @@ for train,test in kf:
     i+=1
 
 
-# In[46]:
-
-
 lasso=linear_model.Lasso(alpha=best_alpha)
 best_model=lasso.fit(x_train,y_train)
 yp=lasso.predict(x_test)
@@ -111,24 +90,12 @@ total_error = np.dot(error,error)
 rmse = np.sqrt(total_error/len(y_pred))
 
 
-# In[47]:
-
-
 print('test rmse without Lasso=',rmse_init)
 print('CrossValidation rmse=',rmse_cv)
 print('model with best lambda rmse=',rmse)
 print('best lambda=',best_alpha)
 
-
-# In[52]:
-
-
 weights=lasso.coef_
-
-
-# In[106]:
-
 
 imp_weigths_index=sorted(range(len(weights)), key=lambda k: weights[k],reverse=True)
 imp_weigths=sorted(weights,reverse=True)
-
